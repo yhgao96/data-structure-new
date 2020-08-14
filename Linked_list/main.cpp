@@ -14,6 +14,7 @@ public:
 	Link* Delelem(Link *p, int pos);  //删除元素
 	int Selectelem(Link *p, int elem); //链表查找元素
 	Link* Amendelem(Link* p, int pos, int newelem);  //链表更新元素
+	Link* Iteration_reverse(Link* head);   //迭代反转法
 	void display(Link *p);  
 };
 Link* Link::Initlink()
@@ -92,6 +93,32 @@ Link* Link::Amendelem(Link *p, int pos, int newelem)
 	temp->elem = newelem;
 	return p;
 }
+Link* Link::Iteration_reverse(Link* head)
+{
+	if (head == NULL || head->next == NULL){
+		return head;
+	}
+	else{
+		Link * beg = NULL;
+		Link * mid = head;
+		Link * end = head->next;
+		//一直遍历
+		while (1)
+		{
+			mid->next = beg;
+			if (end == NULL){
+				break;
+			}
+			//整体向后移动3个指针
+			beg = mid;
+			mid = end;
+			end = end->next;
+		}
+		//最后修改head头指针的指向
+		head = mid;
+		return head;
+	}
+}
 void Link::display(Link *p)
 {
 	Link *temp = p;
@@ -114,6 +141,8 @@ int main()
 	int pos = p->Selectelem(p, 3);
 	cout << "元素3在链表中的位置是" << pos << endl;
 	p->Amendelem(p, 2, 8);
+	p->display(p);
+	p->Iteration_reverse(p);
 	p->display(p);
 	system("pause");
 	return 0;
