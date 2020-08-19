@@ -1,5 +1,6 @@
+```cpp
 /*
-Ö÷Òª°üº¬Ë³Ğò±íµÄ»ù±¾²Ù×÷
+ä¸»è¦åŒ…å«é¡ºåºè¡¨çš„åŸºæœ¬æ“ä½œ
 */
 #include<iostream>
 #include<cstring>
@@ -8,33 +9,33 @@ using namespace std;
 const int Size = 5;
 class Table{
 public:
-	int *head;  //¶¨ÒåÁËÒ»¸öÊı×é
-	int length;  //µ±Ç°Ë³Ğò±íµÄ³¤¶È
-	int size;    //Ë³Ğò±í·ÖÅäµÄ´æ´¢ÈİÁ¿
+	int *head;  //å®šä¹‰äº†ä¸€ä¸ªæ•°ç»„
+	int length;  //å½“å‰é¡ºåºè¡¨çš„é•¿åº¦
+	int size;    //é¡ºåºè¡¨åˆ†é…çš„å­˜å‚¨å®¹é‡
 public:
-	Table initTable();  //³õÊ¼»¯Ë³Ğò±í
-	Table AddElement(Table t, int elem, int pos);  //²åÈëÔªËØ,elemÎªÔªËØ£¬posÎª²åÈëµÄÎ»ÖÃ
-	Table DeleteElement(Table t, int pos);  //É¾³ıÖ¸¶¨Î»ÖÃµÄÔªËØ
-	int selectElem(Table t, int elem);   //Ë³Ğò±í²éÕÒÔªËØ
-	Table AmendElem(Table t, int elem, int newelem);  //Ë³Ğò±íÖĞ¸ü¸ÄÔªËØ
-	void display(Table t);//Êä³öË³Ğò±íÖĞµÄÔªËØ
+	Table initTable();  //åˆå§‹åŒ–é¡ºåºè¡¨
+	Table AddElement(Table t, int elem, int pos);  //æ’å…¥å…ƒç´ ,elemä¸ºå…ƒç´ ï¼Œposä¸ºæ’å…¥çš„ä½ç½®
+	Table DeleteElement(Table t, int pos);  //åˆ é™¤æŒ‡å®šä½ç½®çš„å…ƒç´ 
+	int selectElem(Table t, int elem);   //é¡ºåºè¡¨æŸ¥æ‰¾å…ƒç´ 
+	Table AmendElem(Table t, int elem, int newelem);  //é¡ºåºè¡¨ä¸­æ›´æ”¹å…ƒç´ 
+	void display(Table t);//è¾“å‡ºé¡ºåºè¡¨ä¸­çš„å…ƒç´ 
 };
-Table Table::initTable()  //³õÊ¼»¯Ë³Ğò±í
+Table Table::initTable()  //åˆå§‹åŒ–é¡ºåºè¡¨
 {
 	Table t;
 	t.head = new int(Size);
 	if (!t.head){
-		cout << "³õÊ¼»¯Ê§°Ü£¡" << endl;
+		cout << "åˆå§‹åŒ–å¤±è´¥ï¼" << endl;
 		exit(0);
 	}
 	t.length = 0;
 	t.size = Size;
 	return t;
 }
-Table Table::AddElement(Table t, int elem, int pos)  //Ìí¼ÓÔªËØ
+Table Table::AddElement(Table t, int elem, int pos)  //æ·»åŠ å…ƒç´ 
 {
 	if (pos > t.length + 1 || pos < 1){
-		cout << "²åÈëÎ»ÖÃ´íÎó£¡";
+		cout << "æ’å…¥ä½ç½®é”™è¯¯ï¼";
 		return t;
 	}
 
@@ -44,7 +45,7 @@ Table Table::AddElement(Table t, int elem, int pos)  //Ìí¼ÓÔªËØ
 		t.head = new int(t.size + 1);
 		memcpy(t.head, tt, t.length*sizeof(int));
 		if (!t.head){
-			cout << "´æ´¢·ÖÅäÊ§°Ü£¡" << endl;
+			cout << "å­˜å‚¨åˆ†é…å¤±è´¥ï¼" << endl;
 			return t;
 		}
 		t.size += 1;
@@ -56,10 +57,10 @@ Table Table::AddElement(Table t, int elem, int pos)  //Ìí¼ÓÔªËØ
 	t.length++;
 	return t;
 }
-Table Table::DeleteElement(Table t, int pos)  //É¾³ıÔªËØ
+Table Table::DeleteElement(Table t, int pos)  //åˆ é™¤å…ƒç´ 
 {
 	if (pos > t.length || pos < 1){
-		cout << "±»É¾³ıÔªËØµÄÎ»ÖÃÓĞÎó£¡" << endl;
+		cout << "è¢«åˆ é™¤å…ƒç´ çš„ä½ç½®æœ‰è¯¯ï¼" << endl;
 		return t;
 	}
 	for (int i = pos; i < t.length; i++){
@@ -68,7 +69,7 @@ Table Table::DeleteElement(Table t, int pos)  //É¾³ıÔªËØ
 	t.length--;
 	return t;
 }
-int Table::selectElem(Table t, int elem)  //²éÕÒÔªËØ
+int Table::selectElem(Table t, int elem)  //æŸ¥æ‰¾å…ƒç´ 
 {
 	for (int i = 0; i < t.length; i++)
 	{
@@ -79,7 +80,7 @@ int Table::selectElem(Table t, int elem)  //²éÕÒÔªËØ
 	}
 	return (-1);
 }
-Table Table::AmendElem(Table t, int elem, int newelem)//Ë³Ğò±íÖĞ¸ü¸ÄÔªËØ
+Table Table::AmendElem(Table t, int elem, int newelem)//é¡ºåºè¡¨ä¸­æ›´æ”¹å…ƒç´ 
 {
 	int pos = selectElem(t, elem);
 	t.head[pos - 1] = newelem;
@@ -96,22 +97,23 @@ int main()
 {
 	Table t;
 	t = t.initTable();
-	//ÏòË³Ğò±íÖĞÌí¼ÓÔªËØ
+	//å‘é¡ºåºè¡¨ä¸­æ·»åŠ å…ƒç´ 
 	for (int i = 1; i <= Size; i++)
 	{
 		t.head[i - 1] = i;
 		t.length++;
 	}
-	cout << "Ë³Ğò±íÖĞ´æ´¢µÄÔªËØ·Ö±ğÊÇ£º" << endl;
+	cout << "é¡ºåºè¡¨ä¸­å­˜å‚¨çš„å…ƒç´ åˆ†åˆ«æ˜¯ï¼š" << endl;
 	display(t);
 	t = t.AddElement(t, 20, 3);
 	display(t);
 	t = t.DeleteElement(t, 3);
 	display(t);
 	int p = t.selectElem(t, 4);
-	cout << "Ë³Ğò±íÖĞÔªËØ4µÄÎ»ÖÃÎª£º" << p << endl;
+	cout << "é¡ºåºè¡¨ä¸­å…ƒç´ 4çš„ä½ç½®ä¸ºï¼š" << p << endl;
 	t = t.AmendElem(t, 3, 8);
 	display(t);
 	system("pause");
 	return 0;
 }
+```
