@@ -1,7 +1,7 @@
 ```cpp
 /*
-  链表的相关操作  
-              ---2020.08.19
+链表的相关操作
+---2020.08.19
 */
 #include<iostream>
 using namespace std;
@@ -33,7 +33,7 @@ link* insertLink(link *p, int elem, int pos)
 		temp = temp->next;
 		if (temp == NULL){
 			cout << "插入位置无效" << endl;
-		    return p;
+			return p;
 		}
 	}
 	link *c = (link*)malloc(sizeof(link));
@@ -87,8 +87,40 @@ link* updateElem(link* p, int pos, int newelem)
 		}
 	}
 	temp->elem = newelem;
-	return p; 
+	return p;
 }
+//反转带头结点的链表
+link* reverseLink(link* head)
+{
+	link * p = head->next;
+	link * aa = NULL;
+	link * newhead = (link*)malloc(sizeof(link));
+	while (p!= NULL)
+	{
+		link* temp = p->next;
+		p->next = aa;
+		aa = p;
+		p = temp;
+	}
+	newhead->next = aa;
+	return newhead;
+}
+/*
+//反转不带头结点的链表
+link* reverseLink(link* head)
+{
+	link * p = head;
+	link * newhead = NULL;
+	while (p!= NULL)
+	{
+		link* temp = p->next;
+		p->next = newhead;
+		newhead = p;
+		p = temp;
+	}
+	return newhead;
+}
+*/
 //打印链表
 void display(Link *p)
 {
@@ -104,16 +136,17 @@ int main()
 {
 	link* pp = (link*)malloc(sizeof(link));
 	pp = initLink();
-	display(pp); 
+	display(pp);
 	pp = insertLink(pp, 10, 3);
 	display(pp);
 	pp = deleteLink(pp, 3);
 	display(pp);
 	int pos = selectElem(pp, 4);
 	cout << pos << endl;
-	pp = updateElem(pp, 3,10);
+	pp = updateElem(pp, 3, 10);
 	display(pp);
-
+	pp = reverseLink(pp);
+	display(pp);
 	system("pause");
 	return 0;
 }
